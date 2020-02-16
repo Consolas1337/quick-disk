@@ -1,4 +1,6 @@
 <?php
+include config.php;
+
 header('Content-Type: application/json');
 function sendError($message) {
     echo json_encode(array("error" => $message));
@@ -8,8 +10,7 @@ if (!isset($_POST['password'])) {
     sendError("Need password!");
 }
 $password = $_POST['password'];
-$mysqli = new mysqli("localhost", "a0320508_disk", "019283", "a0320508_disk");
-// $mysqli = new mysqli("localhost", "root", "", "disk");
+$mysqli = new mysqli($host, $login, $password, $database);
 $response = array();
 
 if ($mysqli->connect_error) {

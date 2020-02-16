@@ -21,7 +21,7 @@ $userPass = $mysqli->real_escape_string($userPass);
 $result = $mysqli->query("SELECT token,name,role FROM `users` WHERE password=".$userPass);
 
 if ($result->num_rows === 0 or !$result) {
-    sendError("Wrond password");
+    sendError("Wrong password");
 }
 echo json_encode($result->fetch_assoc());
 $mysqli->close();

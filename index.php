@@ -20,11 +20,11 @@
     watch: {
         password: function(newPass, oldPass) {
             // todo: add loading icon
-            this.debounceGetFiles();
+            this.debounceLogin();
         },
     },
     created: function() {
-        this.debounceGetFiles = _.debounce(this.getFiles, 750);        
+        this.debounceLogin = _.debounce(this.login, 750);        
     },
     data: {
         password: '',
@@ -34,20 +34,28 @@
         },
     },
     methods: {
-        getFiles: function() {
+        login: function() {
             this.request = new URLSearchParams();
             this.request.append('password', this.password);
             console.log("Submit complete!");
             axios
                 .post('./login.php',this.request)
-                .then(response => this.loadData(response))
+                .then(response => this.loadUserData(response))
                 .catch(error => console.log(error));
         },
-        loadData: function(response) {
-            console.log(response.data);
-            window.localStorage = response.data;
+        loadUserData: function(response) {
             this.data = response.data;
+            if (this.data.error===undefined) {
+                return false;
+            }
+            localStorage.token = this.data.token;
+            localStorage.name = this.data.name;
         },
+    },
+    mounted() {
+        if (localStorage.name & localStorage.token) {
+            console.log("You logged in");
+        }
     },
     })
     </script>

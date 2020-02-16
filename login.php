@@ -1,5 +1,5 @@
 <?php
-include config.php;
+include 'config.php';
 
 header('Content-Type: application/json');
 function sendError($message) {
@@ -9,7 +9,7 @@ function sendError($message) {
 if (!isset($_POST['password'])) {
     sendError("Need password!");
 }
-$password = $_POST['password'];
+$userPass = $_POST['password'];
 $mysqli = new mysqli($host, $login, $password, $database);
 $response = array();
 
@@ -17,8 +17,8 @@ if ($mysqli->connect_error) {
     sendError("MySQL error: ".$mysqli->connect_error);
 }
 
-$passowrd = $mysqli->real_escape_string($password);
-$result = $mysqli->query("SELECT token,name,role FROM `users` WHERE password=".$password);
+$userPass = $mysqli->real_escape_string($userPass);
+$result = $mysqli->query("SELECT token,name,role FROM `users` WHERE password=".$userPass);
 
 if ($result->num_rows === 0 or !$result) {
     sendError("Wrond password");

@@ -32,7 +32,6 @@
         this.debounceLogin = _.debounce(this.login, 750);        
     },
     data: {
-        newPassword: '',
         password: '',
         request: {},
         data: {
@@ -67,27 +66,25 @@
     </script>
     <script>
     new Vue({
-    el: "#auth",
+    el: "#register",
     data: {
-
+        newPassword: '',
     },
     methods: {
         register: function() {
+            let parentThis = this;
             VK.Auth.login(function(vkResponse) {
             if (vkResponse.session) {
-                vkResponse.session.append("password",this.newPassword)
-                /* Пользователь успешно авторизовался */
+                let incomingData = new URLSearchParams({new_password: parentThis.newPassword, session: JSON.stringify(vkResponse.session)});
                 axios
-                    .post('./register.php',vkResponse.session)
+                    .post('./register.php',incomingData)
                     .then(response => console.log(response.data))
                     .catch(error => console.log(error));
-                console.log(vkResponse.status);
             } else {
-                console.log("Пользователь нажал кнопку Отмена в окне авторизации");
-                /* Пользователь нажал кнопку Отмена в окне авторизации */
+                alert("Для регистрации нужно авторизироваться с помощью VK. Без этого никак.");
             }
             });
-        };
+        },
     },
     mounted() {
         VK.init({

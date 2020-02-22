@@ -10,8 +10,8 @@
 <body id="body">
     <div class="auth-container" id="auth">
         <div class="auth-body">
-            <a v-if="!data.name">Private password: </a><input type="password" v-if="!data.name" placeholder="password here" v-model="password"></input><br>
-            <a v-if="data.name">Welcome {{ data.name }}</a>
+            <a v-if="!data.name">Private password: </a><input type="password" v-if="!data.name" placeholder="password here" v-model="password"></input>
+            <br><a v-if="data.name">Welcome {{ data.name }}</a>
         </div>
     </div>
     <script>
@@ -63,27 +63,3 @@
 </html>
 
 
-<!--
-    <div id="dropzone">
-		<form class="box" method="post" action="" enctype="multipart/form-data">
-			<div class="container">
-            
-				$files = scandir("./files");
-				for ($i = 2; $i < count($files); $i++) {
-					$type = array_pop(explode(".",$files[$i]));
-					if (!file_exists ("css/png/".strtoupper ($type).".png")) {
-						$type = "file";
-					}
-					echo '
-					<div class="file-block" onClick="window.location=\'files/'.$files[$i].'\'">
-						<img class="file-img" src="css/png/'.strtoupper ($type).'.png" height="150px" width="150px"><br>
-						<a class="file-name">'.$files[$i].'</a>
-					</div>
-				';
-				}
-				
-			</div>
-		</form>
-	</div>
-    <script src="download.js"></script>
-    -->

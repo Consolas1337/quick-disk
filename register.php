@@ -1,34 +1,31 @@
 <?php
 include 'config.php';
 
+function sendError($message) {
+    echo json_encode(array("error" => $message));
+    die();
+}
+
+if (!isset($_POST['newpassword']) and !isset($_POST['password']) and !isset($_POST['password']) and !isset($_POST['password'])) {
+    sendError("Need password!");
+}
+
+$userPass = $_POST['password'];
+$mysqli = new mysqli($host, $login, $password, $database);
+$response = array();
+
+if ($mysqli->connect_error) {
+    sendError("MySQL error: ".$mysqli->connect_error);
+}
+
+$userPass = $mysqli->real_escape_string($userPass);
+$result = $mysqli->query("SELECT token,name,role FROM `users` WHERE password=".$userPass);
+
+if ($result->num_rows === 0 or !$result) {
+    sendError("Wrong password");
+}
+
+echo json_encode($result->fetch_assoc());
+$mysqli->close();
 
 ?>
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
-    <script src="https://vk.com/js/api/openapi.js?167" type="text/javascript"></script>
-</head>
-<body>
-<input type="button" value="Register" onclick="login()">
-<script type="text/javascript">
-  VK.init({
-    apiId: 7331619,
-  });
-  function login() {
-    VK.Auth.login(function(response) {
-    if (response.session) {
-        /* Пользователь успешно авторизовался */
-        console.log(response.session);
-        console.log(response.status);
-    } else {
-        console.log("Пользователь нажал кнопку Отмена в окне авторизации");
-        /* Пользователь нажал кнопку Отмена в окне авторизации */
-    }
-    });
-};
-</script>
-</body>
-</html>

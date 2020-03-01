@@ -10,11 +10,13 @@ body {
 	src: url("fonts/Oxanium-Light.ttf");
    }
 header {
+	position: relative;
 	display: block;
 	width: 100%;
 	height: 4em;
 	background-color: #FFFFFF;
 	box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+	z-index: 5;
 }
 .auth-container {
 	position: relative;
@@ -25,6 +27,17 @@ header {
 	background-color: #FFFFFF;	
 	border-bottom: 1px rgb(46, 46, 46);
 }
+.auth-container:hover::after {
+    content: 'Для входа нужно просто ввести пароль!';
+    position: inherit; 
+    top: 8em;
+	z-index: 100; 
+    background: #ecf0f1; 
+    font-family: Arial, sans-serif; 
+    font-size: 11px; 
+    padding: 5px 10px; 
+	border: 1px solid #333; 
+   }
 .auth-body {
 	display: inline-block;
 	position: absolute;
@@ -34,6 +47,7 @@ header {
 	text-align: justify;
 	vertical-align: middle;
 }
+
 .logo-container {
 	position: relative;
 	float: left;
@@ -61,4 +75,63 @@ header {
 }
 .logo-link:any-link {
 	color: black;
+}
+.main {
+	height: calc(100% - 4em);
+	width: 100%;
+	display: inline-block;
+}
+.folders-container {
+	width: 20em;
+	height: 100%;
+	background-color: white;
+	border-right: 1px rgb(46, 46, 46);
+	box-shadow: 2px 0px 5px rgba(0,0,0,0.5);
+	z-index: -5;
+	vertical-align: top;
+	display: inline-flex;
+	flex-direction: column;
+	flex-basis: 20em;
+}
+.folders-element {
+	border: 1px solid #bdc3c7;
+	border-radius: 5px;
+	width: calc(100% - 2em);
+	height: 2.5em;
+	margin: .5em 1em;
+	transition: .3s linear;
+	cursor: pointer;
+}
+.folders-element img{
+	height: 2em;
+	width: 2em;
+	margin: .25em;
+	float: left;
+}
+.folders-element .folders-element-name{
+	display: inline-block;
+	margin: .75em 0 .75em 1em;
+	vertical-align: middle;
+}
+.folders-element:hover {
+	background-color: #ecf0f1;	
+}
+.files-container {
+	overflow: auto;
+	display: inline-flex;
+	flex-direction: row;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	height: 100%;
+	width: calc(100% - 20em - 4px);
+	align-content: flex-start;
+	transition: flex .5s ease;
+}
+.files-file {
+	flex-basis: 10em;
+	height: 10em;
+	width: 10em;
+	background-color: aqua;
+	margin: 1em;
+	transition: flex .5s ease;
 }

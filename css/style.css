@@ -23,20 +23,14 @@ header {
 	float: right;
 	font-family: 'Roboto', sans-serif; 
 	height: 100%;
-	width: 400px;
+	width: 4em;
 	background-color: #FFFFFF;	
 	border-bottom: 1px rgb(46, 46, 46);
+	transition: .5s ease;
 }
-.auth-container:hover::after {
-    content: 'Для входа нужно просто ввести пароль!';
-    position: inherit; 
-    top: 8em;
-	z-index: 100; 
-    background: #ecf0f1; 
-    font-family: Arial, sans-serif; 
-    font-size: 11px; 
-    padding: 5px 10px; 
-	border: 1px solid #333; 
+.auth-container:hover {
+	background-color: #ecf0f1;
+	cursor: pointer;
    }
 .auth-body {
 	display: inline-block;
@@ -44,16 +38,22 @@ header {
 	top: 50%;
 	margin-top: -0.625em;
 	width: 100%;
-	text-align: justify;
+	text-align: center;
 	vertical-align: middle;
+	height: 2
 }
-
+.auth-button {
+	vertical-align: middle;
+	text-align: center;
+	top: 50%;
+    margin-top: -0.625em;
+}
 .logo-container {
 	position: relative;
 	float: left;
 	height: 100%;
 	font-size: 200%;
-	width: 400px;
+	width: 10em;
 }
 .logo-body {
 	font-family: 'Oxanium';
@@ -94,33 +94,31 @@ header {
 	flex-basis: 20em;
 }
 .folders-element {
-	border: 1px solid #bdc3c7;
-	border-radius: 5px;
-	width: calc(100% - 2em);
-	height: 2.5em;
-	margin: .5em 1em;
+	border-bottom: 1px solid #bdc3c7;
+	width: 100%;
+	height: 3em;
 	transition: .3s linear;
-	cursor: pointer;
 }
 .folders-element img{
 	height: 2em;
 	width: 2em;
-	margin: .25em;
+	margin: .5em;
 	float: left;
 }
 .folders-element .folders-element-name{
 	display: inline-block;
-	margin: .75em 0 .75em 1em;
+	margin: 1em 0 1em 1em;
 	vertical-align: middle;
 }
 .folders-element:hover {
-	background-color: #ecf0f1;	
+	background-color: #ecf0f1;
+	cursor: pointer;	
 }
 .files-container {
 	overflow: auto;
 	display: inline-flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: flex-start;
 	flex-wrap: wrap;
 	height: 100%;
 	width: calc(100% - 20em - 4px);

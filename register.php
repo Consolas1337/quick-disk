@@ -11,7 +11,6 @@ header('Content-Type: application/json');
 if (!isset($_POST['new_password']) and !isset($_POST['session'])) {
     sendError("Need 'new_password' and 'session' values!");
 }
-echo json_encode($_POST);
 $session = json_decode($_POST['session']);
 $userPass = $_POST['new_password'];
 

@@ -18,11 +18,12 @@
         </div>
         <div class="auth-container" id="auth">
             <div class="auth-body">
-                <a v-if="!data.name"></a><input type="password" v-if="!data.name" placeholder="password here" v-model="password"></input>   
+                <a v-if="!data.name" class="auth-button">Log In</a>
                 <input type="button" value="Register" v-on:click="register()" v-if="password && !data.role">
                 <br><a v-if="data.name">Welcome {{ data.name }}</a>
             </div>
         </div>
+        
     </header>
     <div class="main">
         <div class="folders-container">
@@ -118,18 +119,6 @@ mounted() {
     }
 },
 });
-$(window).resize(function() {
-  clearTimeout(id);
-  id = setTimeout(doneResizing, 500);
- });
- function doneResizing() {
-    var newheight = $('.files-container').css('height');
-    if (newheight != height) {
-        $('.files-file').fadeOut();
-        $('.files-file').fadeIn();
-        height = newheight;
-    }
-}
 </script>
 </body>
 </html>

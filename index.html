@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://vk.com/js/api/openapi.js?167" type="text/javascript" SameSite="None Secure"></script>
+    <script src="https://vk.com/js/api/openapi.js?167" type="text/javascript" SameSite="None; Secure"></script>
 </head>
 <body id="body">
     <header>
@@ -27,14 +27,25 @@
     </header>
     <div class="main">
         <div class="folders-container">
-            <div class="folders-element"><img src="css/svg/folder.svg"><a class="folders-element-name">Public folder</a></div>
-            <div class="folders-element"><img src="css/svg/folder.svg"><a class="folders-element-name">Folder 1</a></div>
-            <div class="folders-element"><img src="css/svg/folder.svg"><a class="folders-element-name">Folder 2</a></div>
-            <div class="folders-element"><img src="css/svg/folder.svg"><a class="folders-element-name">Folder 3</a></div>
-            <div class="folders-element"><img src="css/svg/folder.svg"><a class="folders-element-name">Folder 4</a></div>
+            <div class="folders-element" v-bind:class="{ 'folders-element-active': activeFolder[0] }"><img src="css/svg/folder.svg"><a class="folders-element-name">Public folder</a></div>
+            <div class="folders-element" v-bind:class="{ 'folders-element-active': activeFolder[1] }"><img src="css/svg/folder.svg"><a class="folders-element-name">Folder 1</a></div>
+            <div class="folders-element" v-bind:class="{ 'folders-element-active': activeFolder[2] }"><img src="css/svg/folder.svg"><a class="folders-element-name">Folder 2</a></div>
+            <div class="folders-element" v-bind:class="{ 'folders-element-active': activeFolder[3] }"><img src="css/svg/folder.svg"><a class="folders-element-name">Folder 3</a></div>
+            <div class="folders-element" v-bind:class="{ 'folders-element-active': activeFolder[4] }"><img src="css/svg/folder.svg"><a class="folders-element-name">Folder 4</a></div>
         </div>
         <div class="files-container">
-            <div class="files-file" v-for="key in testArray">{{ key }}</div>
+            <div class="files-file-container" v-for="key in testArray">
+                <div class="files-file-buttons">
+                    <a href="#">##</a>
+                    <a href="#">##</a>
+                </div>
+                <div class="files-file">
+                    <img src="https://via.placeholder.com/200?text=Icon Here" class="files-icon">
+                    <div class="files-name-block">
+                        <a class="files-name-text">Тестовый файл #{{ key }}. Тут куча текста для теста. А тут текст не влезает :)</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 <script>
@@ -103,17 +114,18 @@ mounted() {
 }, 
 });
 new Vue({
-el: ".files-container",
-name: "filesApp",
+el: ".main",
+name: "mainApp",
 data: {
     testArray: [],
+    activeFolder: [0,0,0,0,0],
 },
 methods: {
 
 },
 mounted() {
     let i=0;
-    while (i < 3) { 
+    while (i < 100) { 
         i++;
         this.testArray.push(i);
     }

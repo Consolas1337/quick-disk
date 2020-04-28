@@ -27,12 +27,12 @@
     </header>
     <div class="main">
         <div class="folders-container">
-            <div class="folders-element" v-bind:class="{ 'folders-element-active': activeFolder[0] }"><img src="css/svg/folder.svg"><a class="folders-element-name">Public folder</a></div>
-            <div class="folders-element" v-bind:class="{ 'folders-element-active': activeFolder[1] }"><img src="css/svg/folder.svg"><a class="folders-element-name">Folder 1</a></div>
-            <div class="folders-element" v-bind:class="{ 'folders-element-active': activeFolder[2] }"><img src="css/svg/folder.svg"><a class="folders-element-name">Folder 2</a></div>
-            <div class="folders-element" v-bind:class="{ 'folders-element-active': activeFolder[3] }"><img src="css/svg/folder.svg"><a class="folders-element-name">Folder 3</a></div>
-            <div class="folders-element" v-bind:class="{ 'folders-element-active': activeFolder[4] }"><img src="css/svg/folder.svg"><a class="folders-element-name">Folder 4</a></div>
-        </div>
+            <!-- <div class="folders-element" v-bind:class="{ 'folders-element-active': activeFolder[0] }"><img src="css/svg/folder.svg"><a class="folders-element-name">Public folder</a></div> -->
+            <div class="folders-element" v-for="folder in folders" v-bind:class="{ 'folders-element-active': folder.active }">
+                <img src="css/svg/folder.svg">
+                <a class="folders-element-name">{{ folder.name }}</a>
+            </div>
+        </div> 
         <div class="files-container">
             <div class="files-file-container" v-for="key in testArray">
                 <div class="files-file-buttons">
@@ -118,7 +118,64 @@ el: ".main",
 name: "mainApp",
 data: {
     testArray: [],
-    activeFolder: [0,0,0,0,0],
+    activeFolder: null,
+    folders: {
+        0:{
+            id: 1,
+            name: "Folder 1",
+            active: 0,
+        },
+        1:{
+            id: 2,
+            name: "Folder 2",
+            active: 0,
+        },        
+        2:{
+            id: 3,
+            name: "Folder 3",
+            active: 0,
+        },
+        3:{
+            id: 4,
+            name: "Folder 4",
+            active: 0,
+        },
+        4:{
+            id: 5,
+            name: "Folder 5",
+            active: 0,
+        },
+        5:{
+            id: 6,
+            name: "Folder 6",
+            active: 0,
+        },
+        6:{
+            id: 7,
+            name: "Folder 7",
+            active: 0,
+        },
+        7:{
+            id: 8,
+            name: "Folder 8",
+            active: 0,
+        },
+        8:{
+            id: 9,
+            name: "Folder 9",
+            active: 0,
+        },
+        9:{
+            id: 10,
+            name: "Folder 10",
+            active: 0,
+        },
+        10:{
+            id: 11,
+            name: "Folder 11",
+            active: 0,
+        },
+    },
 },
 methods: {
 
@@ -129,6 +186,10 @@ mounted() {
         i++;
         this.testArray.push(i);
     }
+    axios
+        .post('./login.php',this.request)
+        .then(response => this.loadUserData(response))
+        .catch(error => console.log(error));
 },
 });
 </script>
